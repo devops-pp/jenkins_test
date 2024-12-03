@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('pull scm') {
             steps {
-                git credentialsId: 'github', url: 'git@github.com:devops-pp/jenkins_test.git'
+                git credentialsId: 'github', url: 'git@github.com:sathishbob/jenkins_test.git'
             }
         }
         
@@ -21,8 +21,13 @@ pipeline {
         stage('publish') {
             steps {
                 junit stdioRetention: '', testResults: 'api-gateway/target/surefire-reports/*.xml'
-                // archiveArtifacts 'api-gateway/target/*.jar'
-                archiveArtifacts artifacts: 'api-gateway/target/*.jar', followSymlinks: false
+                archiveArtifacts 'api-gateway/target/*.jar'
+            }
+        }
+
+        stage('print') {
+            steps {
+                echo "testing"
             }
         }
     }
